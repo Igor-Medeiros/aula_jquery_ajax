@@ -1,19 +1,27 @@
 function consultaCep(){
-    var inserindoCep = document.getElementById("inserindoCep").value;
-    var url = "https://viacep.com.br/ws/" + inserindoCep + "/json/";
+    $(".barra-progresso").show();
+    var buscandocep = document.getElementById("buscandocep").value;
+    var url = "https://viacep.com.br/ws/" + buscandocep + "/json/";
 
     $.ajax({
         url: url,
         type: "GET",
         success: function(response){
+            console.log(response);
             $("#logradouro").html(response.logradouro);
-            $("cep").html(response.cep);            
-            $("bairro").html(response.bairro);
-            $("localidade").html(response.localidade);
-            $("uf").html(response.uf);
-            $("ibge").html(response.ibge);
-
+            $("#bairro").html(response.bairro);
+            $("#localidade").html(response.localidade);
+            $("#uf").html(response.uf);
+            $("#ibge").html(response.ibge);
+            $("#cep").html("CEP: " + response.cep)
+            $(".cep").show();
+            $(".barra-progresso").hide();
             //document.getElementById("logradouro").innerHTML = response.logradouro;
         }
     })
 }
+
+$(function(){
+    $(".cep").hide();
+    $(".barra-progresso").hide();
+})
